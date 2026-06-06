@@ -12,10 +12,9 @@ const NavBar = () => {
 
   const navItems = [
     { name: "Home", path: "/" },
+    { name: "Collections", path: "/collections" },
     { name: "About", path: "/about" },
-    { name: "Pricing", path: "/pricing" },
     { name: "Contact", path: "/contact" },
-    { name: "Orders", path: "/orders" },
   ];
 
   const desktopLinkClass = ({ isActive }) =>
