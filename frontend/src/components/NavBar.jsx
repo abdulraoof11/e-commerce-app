@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { assets } from "../assets/frontend_assets/assets";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link,  NavLink, useLocation } from "react-router-dom";
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -51,7 +51,9 @@ const NavBar = () => {
     <>
       {/* NAVBAR */}
       <div className="flex items-center justify-between py-5 font-medium relative">
+        <Link to="/">
         <img src={assets.logo} alt="logo" className="w-36" />
+        </Link>
 
         {/* DESKTOP MENU */}
         <ul className="hidden sm:flex gap-6 text-sm">
