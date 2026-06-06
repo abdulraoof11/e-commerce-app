@@ -5,7 +5,7 @@ import ProductItem from './../components/ProductItem';
 import Title from '../components/Title';
 
 const Collections = () => {
-  const {products} = useShopContext();
+  const {products, search, setSearch} = useShopContext();
   const [showFilter, setShowFilter] = React.useState(false);
   const [filterProducts, setFilterProducts] = React.useState([]);
   const [category , setCategory] = React.useState([]);
@@ -27,6 +27,9 @@ const Collections = () => {
   }
   const applyFilter = () => {
     let productsCopy = products.slice();
+    if (search.length > 0){
+      productsCopy = productsCopy.filter(product => product.name.toLowerCase().includes(search.toLowerCase()));
+    }
     if(category.length > 0){
       productsCopy = productsCopy.filter(product => category.includes(product.category));
     }
@@ -52,10 +55,11 @@ const Collections = () => {
   }
   useEffect(() => {
     applyFilter();
-  }, [category, subCategory])
+  }, [category, subCategory, search]);
 
 
   return (
+    
     <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t'>
       {/* Filter Options */}
       <div className='min-w-60'>

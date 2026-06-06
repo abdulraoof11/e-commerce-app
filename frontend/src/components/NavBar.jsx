@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { assets } from "../assets/frontend_assets/assets";
 import { Link,  NavLink, useLocation } from "react-router-dom";
+import { useShopContext } from "../context/ShopContext";
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const { showSearch, setShowSearch } = useShopContext();
 
   const menuRef = useRef(null);
   const profileRef = useRef(null);
@@ -70,7 +72,9 @@ const NavBar = () => {
 
         {/* RIGHT SIDE */}
         <div className="flex items-center gap-6 relative">
-          <img src={assets.search_icon} className="w-5 cursor-pointer" />
+        
+            <img onClick={(e)=> setShowSearch(true)} src={assets.search_icon} className="w-5 cursor-pointer" />
+        
 
           {/* PROFILE DROPDOWN WRAPPER */}
           <div ref={profileRef} className="relative">
