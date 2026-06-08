@@ -6,7 +6,7 @@ import { useShopContext } from "../context/ShopContext";
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
-  const { showSearch, setShowSearch } = useShopContext();
+  const { showSearch, setShowSearch, getCartCount } = useShopContext();
 
   const menuRef = useRef(null);
   const profileRef = useRef(null);
@@ -85,45 +85,65 @@ const NavBar = () => {
             />
 
             {/* DROPDOWN */}
-            {profileOpen && (
-              <div className="absolute right-0 mt-3 w-52 bg-white/90 backdrop-blur-xl shadow-xl rounded-2xl overflow-hidden border border-gray-100 z-50 animate-fadeIn">
-                
-                <Link
-                  to="/profile"
-                  onClick={() => setProfileOpen(false)}
-                  className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100"
-                >
-                  👤 My Profile
-                </Link>
+         {profileOpen && (
+  <div className="absolute right-0 mt-3 w-52 bg-white/90 backdrop-blur-xl shadow-xl rounded-2xl overflow-hidden border border-gray-100 z-50 animate-fadeIn">
 
-                <Link
-                  to="/orders"
-                  onClick={() => setProfileOpen(false)}
-                  className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100"
-                >
-                  📦 My Orders
-                </Link>
+    <Link
+      to="/profile"
+      onClick={() => setProfileOpen(false)}
+      className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100"
+    >
+      👤 My Profile
+    </Link>
 
-                <hr className="my-1" />
+    <Link
+      to="/orders"
+      onClick={() => setProfileOpen(false)}
+      className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100"
+    >
+      📦 My Orders
+    </Link>
 
-                <button
-                  onClick={() => {
-                    setProfileOpen(false);
-                    console.log("logout clicked");
-                  }}
-                  className="w-full text-left px-4 py-3 text-sm text-red-600 hover:bg-red-50"
-                >
-                  🚪 Logout
-                </button>
-              </div>
-            )}
+    <hr className="my-1" />
+
+    {/* LOGIN LINK */}
+    <Link
+      to="/login"
+      onClick={() => setProfileOpen(false)}
+      className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100"
+    >
+      🔐 Login
+    </Link>
+
+    {/* REGISTER LINK (optional but good UX) */}
+    {/* <Link
+      to="/register"
+      onClick={() => setProfileOpen(false)}
+      className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100"
+    >
+      📝 Register
+    </Link> */}
+
+    <hr className="my-1" />
+
+    <button
+      onClick={() => {
+        setProfileOpen(false);
+        console.log("logout clicked");
+      }}
+      className="w-full text-left px-4 py-3 text-sm text-red-600 hover:bg-red-50"
+    >
+      🚪 Logout
+    </button>
+  </div>
+)}
           </div>
 
           {/* CART */}
           <Link to="/cart" className="relative">
             <img src={assets.cart_icon} className="w-6" />
             <span className="absolute -top-2 -right-2 bg-black text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">
-              0
+              {getCartCount()}
             </span>
           </Link>
 
